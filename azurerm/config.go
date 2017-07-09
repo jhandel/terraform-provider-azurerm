@@ -19,6 +19,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/arm/graphrbac"
 	"github.com/Azure/azure-sdk-for-go/arm/keyvault"
 	"github.com/Azure/azure-sdk-for-go/arm/network"
+	"github.com/Azure/azure-sdk-for-go/arm/postgresql"
 	"github.com/Azure/azure-sdk-for-go/arm/redis"
 	"github.com/Azure/azure-sdk-for-go/arm/resources/resources"
 	"github.com/Azure/azure-sdk-for-go/arm/scheduler"
@@ -86,6 +87,8 @@ type ArmClient struct {
 	eventHubClient              eventhub.EventHubsClient
 	eventHubConsumerGroupClient eventhub.ConsumerGroupsClient
 	eventHubNamespacesClient    eventhub.NamespacesClient
+
+	postgresqlServersClient postgresql.ServersClient
 
 	providers           resources.ProvidersClient
 	resourceGroupClient resources.GroupsClient
@@ -382,6 +385,12 @@ func (c *Config) getArmClient() (*ArmClient, error) {
 	vnpc.Authorizer = auth
 	vnpc.Sender = autorest.CreateSender(withRequestLogging())
 	client.vnetPeeringsClient = vnpc
+
+	psc := postgresql.NewServersClientWithBaseURI(endpoint, c.SubscriptionID)
+	setUserAgent(&psc.Client)
+	psc.Authorizer = auth
+	psc.Sender = autorest.CreateSender(withRequestLogging())
+	client.postgresqlServersClient = psc
 
 	rtc := network.NewRouteTablesClientWithBaseURI(endpoint, c.SubscriptionID)
 	setUserAgent(&rtc.Client)
