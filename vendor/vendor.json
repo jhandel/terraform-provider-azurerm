@@ -99,6 +99,14 @@
 			"versionExact": "v10.2.1-beta"
 		},
 		{
+			"checksumSHA1": "5hcvPOaIpcEKfjUPv++7r8pxi20=",
+			"path": "github.com/Azure/azure-sdk-for-go/arm/postgresql",
+			"revision": "2d49bb8f2cee530cc16f1f1a9f0aae763dee257d",
+			"revisionTime": "2017-08-01T23:52:55Z",
+			"version": "=v10.2.1-beta",
+			"versionExact": "v10.2.1-beta"
+		},
+		{
 			"checksumSHA1": "olhzqBgaJuavhtLduDqKF88RJXU=",
 			"path": "github.com/Azure/azure-sdk-for-go/arm/redis",
 			"revision": "2d49bb8f2cee530cc16f1f1a9f0aae763dee257d",
